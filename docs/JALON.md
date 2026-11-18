@@ -16,7 +16,7 @@ Référence : `docs/design/combat.md`.
 - [x] P1.3 — Logique pure du chien : enchaînement des attaques (anticipation, impact, récupération), posture, brèche, deux phases. Tests.
 - [x] P1.4 — Arène jouable : rectangles, déplacement, saut, esquive, direction de la lanterne. Le rectangle du chien change de couleur pendant l'anticipation.
 - [ ] P1.5 — Retour d'impact : hitstop, recul, tremblement d'écran, sons provisoires.
-- [ ] P1.6 — Affichage de debug (activable) : huile, lumière, posture, état courant, fenêtre de parade.
+- [x] P1.6 — Affichage de debug (activable) : huile, lumière, posture, état courant, fenêtre de parade.
 - [ ] P1.7 — Interrupteur variante A / variante B pour le test comparatif.
 - [ ] P1.8 — Enregistrement et relecture des entrées d'une partie (pour reproduire un bug ou un ressenti).
 
@@ -36,6 +36,8 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — P1.3 : `PostureGauge`, `DogBoss`, `Duel` (relie enfant et chien ; la couche jeu fournit « à portée » et « loin »). Choix à valider : lever la lanterne sur le chien en brèche l'apaise sans compter comme parade dans le vide ; brèche non apaisée en 2 s → le chien se relève, posture à 0, même phase ; la relâche ne touche que si l'enfant est à portée.
 - 2026-11-18 — **Observation d'équilibrage** (pas de changement de données) : un joueur parfait scripté apaise le chien en **331 images (5,5 s)** dans les deux variantes — 5 parades parfaites par phase suffisent. Loin des 2 à 4 min visées : à garder en tête en jouant (posture max, posture par parade, régénération).
 - 2026-11-18 — P1.4 : arène jouable (`src/scenes/arena.tscn`, chargée par `main.tscn`). Déplacements dans `src/core/arena_motion.gd` (pur, testé) ; `ArenaFight` réunit duel et déplacements, `ChildInput` porte aussi déplacement et saut (unité à enregistrer en P1.8). Valeurs proposées dans `data/arena.tres`, à régler. Choix : l'enfant fait toujours face au chien ; un saut au-dessus de `jump_clear_height` évite les attaques « devant » ; le bond du chien atterrit à mi-impact ; l'esquive part dans le sens du déplacement, sinon en arrière.
+- 2026-11-18 — Premier essai manette : la boucle parer/charger/relâcher fonctionne. **Brèche peu claire** : R1 répété sur le chien bleu semblait sans effet ou « relançait » le combat. Causes possibles : hors de portée (zone de 150 px entre centres, soit ~80 px du bord du chien), appuis ignorés pendant la récupération d'une parade dans le vide, ou apaisement réussi mais passage en phase 2 sans retour visuel. **À garder en tête** : rayon d'apaisement visible ou plus large, retour clair du changement de phase.
+- 2026-11-18 — P1.6 (avancée avant P1.5 pour comprendre la brèche) : panneau de debug (F1 / Select, actif au lancement) avec huile, fenêtre, lumière, posture, phase, états, temps de brèche, distance ; zone de portée verte et limites « loin » rouges autour du chien ; journal des événements (`CombatLog`) dont « Apaisé → phase 2 », « Apaisement hors de portée », « R1 ignoré : … ».
 
 ## Plus tard (hors périmètre de P1)
 

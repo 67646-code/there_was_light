@@ -110,6 +110,13 @@ func frames_to_impact() -> int:
 	return current_windup() - (frame - _state_start)
 
 
+## Images restantes de la brèche (0 hors brèche).
+func break_frames_remaining() -> int:
+	if state != State.BROKEN:
+		return 0
+	return data.break_stun_frames - (frame - _state_start)
+
+
 func _start_attack(child_is_far: bool) -> void:
 	attack = _choose_attack(child_is_far)
 	hit_index = 0

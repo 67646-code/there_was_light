@@ -7,14 +7,25 @@ extends Node2D
 @export var arena_settings: ArenaSettings
 @export var rng_seed: int = 1
 
+## Affichage de debug au lancement (F1 / Select pour basculer).
+@export var debug_on_start: bool = true
+
 var fight: ArenaFight
+var combat_log: CombatLog
 
 @onready var _view: ArenaView = %ArenaView
 @onready var _message: Label = %Message
+@onready var _debug: DebugOverlay = %DebugOverlay
 
 
 func _ready() -> void:
+	_set_debug(debug_on_start)
 	_restart()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed(&"debug_toggle"):
+		_set_debug(not _debug.visible)
 
 
 func _physics_process(_delta: float) -> void:
@@ -25,6 +36,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	fight.tick(input)
 	_view.queue_redraw()
+	_debug.queue_redraw()
 
 
 ## Instantané de la manette pour cette image.
@@ -45,11 +57,21 @@ static func read_controller() -> ChildInput:
 func _restart() -> void:
 	fight = ArenaFight.new(child_settings, boss_data, arena_settings, rng_seed)
 	fight.duel.ended.connect(_on_fight_ended)
+	combat_log = CombatLog.new(fight.duel)
 	_view.fight = fight
+	_debug.fight = fight
+	_debug.combat_log = combat_log
 	_message.text = ""
+	_view.queue_redraw()
+
+
+func _set_debug(on: bool) -> void:
+	_debug.visible = on
+	_view.show_debug = on
 	_view.queue_redraw()
 
 
 func _on_fight_ended(child_won: bool) -> void:
 	var outcome: String = "Le chien est apaisé." if child_won else "L'enfant est tombé."
 	_message.text = outcome + "\nSaut pour recommencer."
+	_debug.queue_redraw()

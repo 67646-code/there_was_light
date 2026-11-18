@@ -19,8 +19,12 @@ const DOG_PACIFIED := Color(1.0, 0.95, 0.7)
 const LIGHT_COLOR := Color(1.0, 0.95, 0.6)
 const HEALTH_COLOR := Color(0.9, 0.3, 0.35)
 const LANTERN_SIZE := Vector2(18, 18)
+const RANGE_COLOR := Color(0.4, 0.9, 0.5, 0.18)
+const FAR_COLOR := Color(0.95, 0.35, 0.35, 0.35)
 
 var fight: ArenaFight
+## Affiche la zone de portée et la limite « loin » autour du chien.
+var show_debug: bool = false
 
 
 func _draw() -> void:
@@ -28,9 +32,20 @@ func _draw() -> void:
 		return
 	var arena := fight.motion.settings
 	draw_rect(Rect2(-arena.half_width, 0, arena.half_width * 2, 300), FLOOR_COLOR)
+	if show_debug:
+		_draw_ranges(arena)
 	_draw_dog(arena)
 	_draw_child(arena)
 	_draw_pips()
+
+
+func _draw_ranges(arena: ArenaSettings) -> void:
+	# Zone verte : l'enfant y est à portée (coups du chien, relâche, apaisement).
+	var dog_x := fight.motion.dog_x
+	draw_rect(Rect2(dog_x - arena.hit_range, -260, arena.hit_range * 2, 260), RANGE_COLOR)
+	for side: float in [-1.0, 1.0]:
+		var far_x := dog_x + side * arena.far_distance
+		draw_line(Vector2(far_x, -260), Vector2(far_x, 0), FAR_COLOR, 2.0)
 
 
 func _draw_child(arena: ArenaSettings) -> void:
