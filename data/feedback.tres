@@ -101,3 +101,6 @@ guard_break = SubResource("guard_break")
 release = SubResource("release")
 posture_break = SubResource("posture_break")
 soothe = SubResource("soothe")
+parry_cue_enabled = true
+parry_cue_lead_frames = 20
+parry_cue_frames = 6

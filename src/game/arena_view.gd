@@ -16,6 +16,7 @@ const DOG_TELL := Color(1.0, 0.55, 0.1)
 const DOG_ACTIVE := Color(0.95, 0.15, 0.15)
 const DOG_BROKEN := Color(0.55, 0.75, 1.0)
 const DOG_PACIFIED := Color(1.0, 0.95, 0.7)
+const DOG_CUE := Color(1.0, 1.0, 1.0)
 const LIGHT_COLOR := Color(1.0, 0.95, 0.6)
 const HEALTH_COLOR := Color(0.9, 0.3, 0.35)
 const LANTERN_SIZE := Vector2(18, 18)
@@ -86,6 +87,8 @@ func _draw_dog(arena: ArenaSettings) -> void:
 			color = DOG_BROKEN
 		DogBoss.State.PACIFIED:
 			color = DOG_PACIFIED
+	if fight.parry_cue_active():
+		color = DOG_CUE
 	var rect := Rect2(Vector2(fight.motion.dog_x - size.x / 2, -size.y), size)
 	draw_rect(rect, color)
 	# Les attaques à parer vers le haut sont signalées par une bande au-dessus.

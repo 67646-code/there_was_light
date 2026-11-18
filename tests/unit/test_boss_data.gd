@@ -36,16 +36,16 @@ func test_dog_is_coherent() -> void:
 		assert_true(has_close, "Phase %d sans attaque au contact" % phase)
 
 
-func test_dog_windups_stay_longer_than_parry_window() -> void:
-	# Une anticipation plus courte que la fenêtre de parade rendrait l'attaque illisible.
+func test_one_press_cannot_cover_two_impacts() -> void:
+	# Deux impacts consécutifs doivent être plus espacés que la fenêtre de parade : sinon un
+	# seul appui pourrait viser deux coups et la rafale perdrait son rythme.
 	var b := load(DOG) as BossData
 	var child := load("res://data/child_variant_b.tres") as ChildSettings
 	for phase: int in range(1, b.phase_count() + 1):
 		var percent := b.windup_percent_for_phase(phase)
 		for a: AttackData in b.attacks_for_phase(phase):
 			for i: int in a.hit_count:
+				var gap: int = a.windup_for_hit(i, percent) + (a.active_frames if i > 0 else 0)
 				assert_gt(
-					a.windup_for_hit(i, percent),
-					child.perfect_parry_window_frames,
-					"%s coup %d phase %d" % [a.id, i, phase]
+					gap, child.perfect_parry_window_frames, "%s coup %d phase %d" % [a.id, i, phase]
 				)

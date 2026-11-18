@@ -63,6 +63,16 @@ func tick(controller: ChildInput) -> void:
 	motion.tick_dog(approaching and not _dog_frozen(), pushed and not _dog_frozen())
 
 
+## Le chien doit-il flasher (signal de parade) à cette image ?
+func parry_cue_active() -> bool:
+	var dog := duel.dog
+	if not feedback.parry_cue_enabled or dog.state != DogBoss.State.WINDUP:
+		return false
+	var lead: int = mini(feedback.parry_cue_lead_frames, dog.current_windup())
+	var remaining: int = dog.frames_to_impact()
+	return remaining <= lead and remaining > lead - feedback.parry_cue_frames
+
+
 ## État résumé, pour vérifier qu'une relecture retombe exactement au même endroit.
 func summary() -> Dictionary:
 	var child := duel.child

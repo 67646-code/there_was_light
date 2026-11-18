@@ -19,6 +19,7 @@ Référence : `docs/design/combat.md`.
 - [x] P1.6 — Affichage de debug (activable) : huile, lumière, posture, état courant, fenêtre de parade.
 - [x] P1.7 — Interrupteur variante A / variante B pour le test comparatif.
 - [x] P1.8 — Enregistrement et relecture des entrées d'une partie (pour reproduire un bug ou un ressenti).
+- [x] P1.9 — Réglage de la parade après essai : fenêtre de parade parfaite élargie, signal visuel (flash) avant l'impact.
 
 ## Critère de sortie
 
@@ -45,7 +46,11 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — **Réponses aux questions de `combat.md`** (en cours) :
   - Q1 (A ou B) : **la variante B est clairement la plus amusante.**
   - Q3 (relâcher maintenant ou tenir) : **le choix existe en jeu.**
-  - Q2 (lisibilité des 24 images), Q4 (avancer lanterne tendue), Q5 (huile : tension ou frustration) : à venir.
+  - Q2 (lisibilité) : trouver le timing de la parade parfaite est **difficile** — l'ensemble anticipation + fenêtre est trop court pour un premier boss.
+  - Q4 (avancer lanterne tendue) : oublié, non parce qu'inutile mais parce que la parade est plus avantageuse. **On garde tel quel** pour l'instant.
+  - Q5 (huile) : garde brisée vécue comme de la **tension**, pas de la frustration. On garde.
+- 2026-11-18 — **Décision : continuer en ajustant le timing de la parade.** Étape 1 (P1.9, validée par l'humain) : fenêtre 8 → 12 images (les deux variantes) et flash blanc du chien 20 images avant l'impact pendant 6 images (`data/feedback.tres`, désactivable), calé pour qu'un appui en réaction (~200 ms) tombe dans la fenêtre. Étape 2 si encore trop dur : anticipations de phase 1 allongées (morsure 24 → 30, rafale 20/14 → 26/18, bond 30 → 36).
+- 2026-11-18 — P1.9, effet de bord : en phase 2, l'anticipation entre deux coups de la rafale (11 images) devient plus courte que la fenêtre (12). L'invariant de test « anticipation > fenêtre » est remplacé par « deux impacts consécutifs plus espacés que la fenêtre » (17 > 12), le vrai risque étant qu'un seul appui vise deux coups.
 
 ## Plus tard (hors périmètre de P1)
 
