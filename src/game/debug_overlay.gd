@@ -31,7 +31,10 @@ func _draw() -> void:
 	var dog := fight.duel.dog
 	var motion := fight.motion
 	var origin := Vector2(size.x - 560, 20)
-	draw_rect(Rect2(origin - Vector2(16, 0), Vector2(556, 640)), PANEL)
+	# Hauteur ajustée au contenu : 7 lignes, 3 interlignes et demi, puis le journal.
+	var entries: int = combat_log.entries.size() if combat_log != null else 0
+	var height: float = LINE * (8.5 + 1.5 + entries) + 8.0
+	draw_rect(Rect2(origin - Vector2(16, 0), Vector2(556, height)), PANEL)
 	var y := origin.y + LINE
 	var x := origin.x
 
