@@ -11,7 +11,7 @@ Référence : `docs/design/combat.md`.
 ## Tâches
 
 - [x] P1.0 — Proposer les entrées (clavier et manette) à ajouter à `project.godot` ; les ajouter après accord.
-- [ ] P1.1 — Classes de données (`src/core/`) et premières ressources (`data/`) : réglages de l'enfant, attaque, boss. Valeurs de `combat.md`.
+- [x] P1.1 — Classes de données (`src/core/`) et premières ressources (`data/`) : réglages de l'enfant, attaque, boss. Valeurs de `combat.md`.
 - [ ] P1.2 — Logique pure de l'enfant, image par image : huile, lumière, parade parfaite, garde, parade dans le vide, relâche, santé. Tests par scénarios.
 - [ ] P1.3 — Logique pure du chien : enchaînement des attaques (anticipation, impact, récupération), posture, brèche, deux phases. Tests.
 - [ ] P1.4 — Arène jouable : rectangles, déplacement, saut, esquive, direction de la lanterne. Le rectangle du chien change de couleur pendant l'anticipation.
@@ -30,6 +30,8 @@ _(Notes courtes et datées au fil du jalon.)_
 
 - 2026-11-18 — P1.0 : entrées validées. Clavier en touches physiques (AZERTY : Z/Q/S/D direction et déplacement, Espace saut, Maj esquive, J lanterne, K relâche, F1 debug, F2 variante) ; manette : stick/croix, A saut, B esquive, RB lanterne, RT relâche, Select debug.
 - 2026-11-18 — Règles précisées : la parade dans le vide ne pénalise que si le bouton est relâché quand la fenêtre expire (tenu → garde sans pénalité). Directions : morsure, rafale, feinte « devant » ; bond « haut ».
+
+- 2026-11-18 — P1.1 : `ChildSettings`, `AttackData`, `BossData`, `CombatTypes`. Variante A/B = choix entre `data/child_variant_a.tres` et `child_variant_b.tres` (aucun drapeau dans le code). Phase 2 : anticipations à 80 %, arrondies à l'image la plus proche (24 → 19). Chaque coup non paré retire `health_damage` = 1.
 
 ## Plus tard (hors périmètre de P1)
 
