@@ -35,7 +35,7 @@ func _init(duel: Duel, capacity: int = 8) -> void:
 	child.hurt.connect(_add_formatted.bind("Touché (santé %d)"))
 	child.lantern_press_ignored.connect(_on_press_ignored)
 	dog.posture_broken.connect(_add_formatted.bind("BRÈCHE phase %d : R1 près du chien"))
-	dog.recovered_from_break.connect(add.bind("Brèche ratée : le chien se relève"))
+	dog.recovered_from_break.connect(_on_dog_recovered)
 	dog.phase_changed.connect(_add_formatted.bind("Apaisé → phase %d"))
 	dog.pacified.connect(add.bind("Chien apaisé : victoire"))
 	duel.soothe_missed.connect(add.bind("Apaisement hors de portée"))
@@ -45,6 +45,10 @@ func add(text: String) -> void:
 	entries.append("[%d] %s" % [_duel.frame, text])
 	while entries.size() > max_entries:
 		entries.pop_front()
+
+
+func _on_dog_recovered() -> void:
+	add("Brèche ratée : le chien se relève (posture %d)" % _duel.dog.posture.value())
 
 
 func _add_formatted(value: int, template: String) -> void:

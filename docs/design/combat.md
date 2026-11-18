@@ -36,6 +36,7 @@ L'huile se perd quand on joue mal ; la lumière se gagne quand on joue bien.
 - Jauge de 0 à 100 qui **monte** avec la posture infligée.
 - Régénération : −5/s après 3 s sans pression *(v0 : −10/s après 2 s ; ralentie après essai)*, bloquée tant que la lanterne avance sur lui.
 - À 100 : **brèche**. Monstre sonné 120 images (2 s) ; l'enfant lève la lanterne pour l'**apaiser** (fin de phase ou du combat).
+- Brèche non apaisée : le monstre se relève dans la même phase avec une posture de 50 *(ajouté après essai : retomber à 0 était trop punitif)*. Une phase apaisée repart de 0.
 
 ## 4. Premier boss : le chien errant
 

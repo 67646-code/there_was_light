@@ -67,3 +67,18 @@ func test_reset() -> void:
 	gauge.reset()
 	assert_false(gauge.is_broken)
 	assert_eq(gauge.value(), 0)
+
+
+func test_reset_to_value_restarts_regen_delay() -> void:
+	gauge.add(100)
+	gauge.reset(50)
+	assert_false(gauge.is_broken)
+	assert_eq(gauge.value(), 50)
+	_ticks(120)
+	assert_eq(gauge.value(), 50)
+
+
+func test_reset_value_never_breaks_again() -> void:
+	gauge.reset(500)
+	assert_false(gauge.is_broken)
+	assert_lt(gauge.value(), 100)
