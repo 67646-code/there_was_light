@@ -58,7 +58,7 @@ func tick(child_is_far: bool, pushed: bool) -> void:
 				_start_attack(child_is_far)
 		State.BROKEN:
 			if elapsed >= data.break_stun_frames:
-				posture.reset()
+				posture.reset(data.posture_after_missed_break)
 				recovered_from_break.emit()
 				_start_attack(child_is_far)
 

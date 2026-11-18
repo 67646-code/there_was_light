@@ -35,6 +35,7 @@ func _boss(phase_1: Array[AttackData], phase_2: Array[AttackData]) -> BossData:
 	b.posture_regen_per_second = 10
 	b.posture_regen_delay_frames = 120
 	b.break_stun_frames = 120
+	b.posture_after_missed_break = 50
 	b.phase_1_attacks = phase_1
 	b.phase_2_attacks = phase_2
 	b.phase_2_windup_percent = 80
@@ -101,6 +102,21 @@ func test_same_seed_same_sequence() -> void:
 	assert_eq(_run(a, 2000), _run(b, 2000))
 
 
+func test_missed_break_keeps_half_posture() -> void:
+	var dog := DogBoss.new(_boss([bite], [bite]), 1)
+	dog.take_posture(100)
+	_run(dog, 120)
+	assert_eq(dog.posture.value(), 50, "Brèche ratée : posture conservée en partie.")
+	assert_false(dog.posture.is_broken)
+
+
+func test_soothing_starts_next_phase_at_zero() -> void:
+	var dog := DogBoss.new(_boss([bite], [bite]), 1)
+	dog.take_posture(100)
+	dog.soothe()
+	assert_eq(dog.posture.value(), 0)
+
+
 func test_break_stuns_then_recovers_in_same_phase() -> void:
 	var dog := DogBoss.new(_boss([bite], [bite]), 1)
 	watch_signals(dog)
@@ -115,7 +131,7 @@ func test_break_stuns_then_recovers_in_same_phase() -> void:
 	_run(dog, 130)
 	assert_eq(dog.state, S.WINDUP)
 	assert_eq(dog.phase, 1)
-	assert_eq(dog.posture.value(), 0)
+	assert_eq(dog.posture.value(), 50)
 
 
 func test_soothe_ends_phase_one_then_fight() -> void:
@@ -137,4 +153,4 @@ func test_posture_ignored_while_broken() -> void:
 	dog.take_posture(100)
 	dog.take_posture(50)
 	_run(dog, 120)
-	assert_eq(dog.posture.value(), 0)
+	assert_eq(dog.posture.value(), 50, "Valeur de relève, pas de cumul pendant la brèche.")

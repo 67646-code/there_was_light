@@ -51,7 +51,8 @@ func tick(pushed: bool) -> void:
 		_value_sub = maxi(_value_sub - regen_per_second, 0)
 
 
-func reset() -> void:
+## Remet la jauge à `start_value` (0 par défaut), intacte, délai de régénération relancé.
+func reset(start_value: int = 0) -> void:
 	is_broken = false
-	_value_sub = 0
+	_value_sub = clampi(start_value, 0, max_value - 1) * SUB_UNITS
 	_frames_without_pressure = 0

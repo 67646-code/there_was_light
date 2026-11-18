@@ -52,6 +52,7 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — **Décision : continuer en ajustant le timing de la parade.** Étape 1 (P1.9, validée par l'humain) : fenêtre 8 → 12 images (les deux variantes) et flash blanc du chien 20 images avant l'impact pendant 6 images (`data/feedback.tres`, désactivable), calé pour qu'un appui en réaction (~200 ms) tombe dans la fenêtre. Étape 2 si encore trop dur : anticipations de phase 1 allongées (morsure 24 → 30, rafale 20/14 → 26/18, bond 30 → 36).
 - 2026-11-18 — P1.9, effet de bord : en phase 2, l'anticipation entre deux coups de la rafale (11 images) devient plus courte que la fenêtre (12). L'invariant de test « anticipation > fenêtre » est remplacé par « deux impacts consécutifs plus espacés que la fenêtre » (17 > 12), le vrai risque étant qu'un seul appui vise deux coups.
 - 2026-11-18 — Essai après P1.9 : « ça marche mieux », mais la posture du chien se régénère trop vite. Réglages demandés par l'humain : fenêtre de parade 12 → **14 images** (233 ms) ; régénération de posture 10 → **5/s**, délai avant régénération 2 s → **3 s** (180 images). `combat.md` mis à jour (valeurs en vigueur, v0 rappelées).
+- 2026-11-18 — Essai après réglage : parade « beaucoup plus équilibrée et juste », combat plus court mais « beaucoup plus agréable ». Sentiment d'injustice quand l'huile tombe à zéro et que la posture du chien remonte. **Brèche ratée → posture à 0 trop punitif** : le chien se relève désormais à 50 (`posture_after_missed_break`, demandé par l'humain : 50-60).
 
 ## Plus tard (hors périmètre de P1)
 

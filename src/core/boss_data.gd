@@ -11,6 +11,8 @@ extends Resource
 @export var posture_regen_delay_frames: int = 0
 ## Durée de la brèche (monstre sonné, apaisable).
 @export var break_stun_frames: int = 0
+## Posture du chien quand il se relève d'une brèche non apaisée (même phase).
+@export var posture_after_missed_break: int = 0
 
 @export_group("Phases")
 @export var phase_1_attacks: Array[AttackData] = []

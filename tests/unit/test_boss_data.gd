@@ -25,6 +25,7 @@ func test_dog_is_coherent() -> void:
 	assert_gt(b.max_posture, 0)
 	assert_gt(b.break_stun_frames, 0)
 	assert_gt(b.posture_regen_delay_frames, 0)
+	assert_between(b.posture_after_missed_break, 0, b.max_posture - 1)
 	for phase: int in range(1, b.phase_count() + 1):
 		var attacks := b.attacks_for_phase(phase)
 		assert_false(attacks.is_empty(), "Phase %d sans attaque" % phase)
