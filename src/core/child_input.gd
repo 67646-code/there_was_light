@@ -7,7 +7,10 @@ var lantern: bool = false
 var release: bool = false
 var dodge: bool = false
 var direction: CombatTypes.Direction = CombatTypes.Direction.FRONT
-## L'enfant se déplace vers le monstre (fourni par la couche jeu).
+## Déplacement horizontal : -1, 0 ou 1.
+var move: int = 0
+var jump: bool = false
+## L'enfant avance lanterne tendue vers le monstre (calculé par ArenaFight, pas par la manette).
 var advancing: bool = false
 
 
@@ -24,4 +27,12 @@ static func make(
 	i.release = release_held
 	i.dodge = dodge_held
 	i.advancing = advancing_now
+	return i
+
+
+## Copie indépendante (l'enregistrement garde des instantanés immuables).
+func copy() -> ChildInput:
+	var i := ChildInput.make(lantern, direction, release, dodge, advancing)
+	i.move = move
+	i.jump = jump
 	return i

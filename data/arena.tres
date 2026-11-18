@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="ArenaSettings" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/core/arena_settings.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+half_width = 900.0
+child_start_x = -300.0
+dog_start_x = 300.0
+child_size = Vector2(40, 90)
+dog_size = Vector2(140, 80)
+child_speed = 360.0
+jump_velocity = 950.0
+gravity = 3000.0
+dodge_speed = 1000.0
+dodge_move_frames = 12
+jump_clear_height = 70.0
+dog_walk_speed = 180.0
+dog_approach_distance = 120.0
+push_speed = 180.0
+min_separation = 95.0
+hit_range = 150.0
+far_distance = 500.0

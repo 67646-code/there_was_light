@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://src/game/arena.gd" id="1_arena"]
+[ext_resource type="Script" path="res://src/game/arena_view.gd" id="2_view"]
+[ext_resource type="Resource" path="res://data/child_variant_b.tres" id="3_child"]
+[ext_resource type="Resource" path="res://data/boss_dog.tres" id="4_dog"]
+[ext_resource type="Resource" path="res://data/arena.tres" id="5_arena"]
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_arena")
+child_settings = ExtResource("3_child")
+boss_data = ExtResource("4_dog")
+arena_settings = ExtResource("5_arena")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -200)
+
+[node name="ArenaView" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_view")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Message" type="Label" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -60.0
+offset_right = 400.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
