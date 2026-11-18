@@ -17,7 +17,7 @@ Référence : `docs/design/combat.md`.
 - [x] P1.4 — Arène jouable : rectangles, déplacement, saut, esquive, direction de la lanterne. Le rectangle du chien change de couleur pendant l'anticipation.
 - [x] P1.5 — Retour d'impact : hitstop, recul, tremblement d'écran, sons provisoires.
 - [x] P1.6 — Affichage de debug (activable) : huile, lumière, posture, état courant, fenêtre de parade.
-- [ ] P1.7 — Interrupteur variante A / variante B pour le test comparatif.
+- [x] P1.7 — Interrupteur variante A / variante B pour le test comparatif.
 - [ ] P1.8 — Enregistrement et relecture des entrées d'une partie (pour reproduire un bug ou un ressenti).
 
 ## Critère de sortie
@@ -40,6 +40,7 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — P1.6 (avancée avant P1.5 pour comprendre la brèche) : panneau de debug (F1 / Select, actif au lancement) avec huile, fenêtre, lumière, posture, phase, états, temps de brèche, distance ; zone de portée verte et limites « loin » rouges autour du chien ; journal des événements (`CombatLog`) dont « Apaisé → phase 2 », « Apaisement hors de portée », « R1 ignoré : … ».
 - 2026-11-18 — Deuxième essai : « ça fonctionne assez bien ». Fenêtres de réussite jugées **un peu trop courtes pour un premier boss** : réglage prévu plus tard (fenêtre de parade, anticipations).
 - 2026-11-18 — P1.5 : retour d'impact par événement dans `data/feedback.tres` (parade parfaite, garde, vide, touché, garde brisée, relâche, brèche, apaisement). Gel et recul dans `ArenaFight` (core, donc rejouables) ; tremblement de caméra et bips générés dans `src/game/impact_effects.gd`. Valeurs proposées, à régler.
+- 2026-11-18 — P1.7 : F2 bascule variante A (parade seule, 20 de posture par parade) / B (fiche) et relance une partie ; variante courante toujours affichée en haut à gauche. Démarrage en B. Pas de bouton manette (convenu en P1.0).
 
 ## Plus tard (hors périmètre de P1)
 

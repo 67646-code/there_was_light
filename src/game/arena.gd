@@ -1,8 +1,12 @@
 extends Node2D
 ## Arène du prototype : lit la manette, fait avancer le combat d'une image par image physique
 ## et laisse la vue l'afficher. Après la fin du combat, « saut » relance une partie.
+## F2 bascule entre les variantes du test comparatif et relance une partie.
 
-@export var child_settings: ChildSettings
+## Réglages de l'enfant pour chaque variante du test comparatif (A, B…).
+@export var variants: Array[ChildSettings] = []
+@export var variant_labels: Array[String] = []
+@export var variant_index: int = 0
 @export var boss_data: BossData
 @export var arena_settings: ArenaSettings
 @export var feedback_settings: FeedbackSettings
@@ -18,6 +22,7 @@ var combat_log: CombatLog
 @onready var _message: Label = %Message
 @onready var _debug: DebugOverlay = %DebugOverlay
 @onready var _effects: ImpactEffects = %ImpactEffects
+@onready var _variant_label: Label = %VariantLabel
 
 
 func _ready() -> void:
@@ -28,6 +33,18 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"debug_toggle"):
 		_set_debug(not _debug.visible)
+	elif event.is_action_pressed(&"variant_toggle"):
+		next_variant()
+
+
+## Passe à la variante suivante et relance une partie.
+func next_variant() -> void:
+	variant_index = (variant_index + 1) % variants.size()
+	_restart()
+
+
+func current_variant() -> ChildSettings:
+	return variants[variant_index]
 
 
 func _physics_process(_delta: float) -> void:
@@ -57,7 +74,9 @@ static func read_controller() -> ChildInput:
 
 
 func _restart() -> void:
-	fight = ArenaFight.new(child_settings, boss_data, arena_settings, rng_seed, feedback_settings)
+	fight = ArenaFight.new(
+		current_variant(), boss_data, arena_settings, rng_seed, feedback_settings
+	)
 	_effects.watch(fight)
 	fight.duel.ended.connect(_on_fight_ended)
 	combat_log = CombatLog.new(fight.duel)
@@ -65,6 +84,8 @@ func _restart() -> void:
 	_debug.fight = fight
 	_debug.combat_log = combat_log
 	_message.text = ""
+	var label := variant_labels[variant_index] if variant_index < variant_labels.size() else ""
+	_variant_label.text = "Variante %s   (F2 pour changer)" % label
 	_view.queue_redraw()
 
 
