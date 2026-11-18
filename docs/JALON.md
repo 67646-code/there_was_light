@@ -42,6 +42,10 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — P1.5 : retour d'impact par événement dans `data/feedback.tres` (parade parfaite, garde, vide, touché, garde brisée, relâche, brèche, apaisement). Gel et recul dans `ArenaFight` (core, donc rejouables) ; tremblement de caméra et bips générés dans `src/game/impact_effects.gd`. Valeurs proposées, à régler.
 - 2026-11-18 — P1.7 : F2 bascule variante A (parade seule, 20 de posture par parade) / B (fiche) et relance une partie ; variante courante toujours affichée en haut à gauche. Démarrage en B. Pas de bouton manette (convenu en P1.0).
 - 2026-11-18 — P1.8 : chaque partie est enregistrée en JSON (réglages, graine, une commande codée par image, résumé final) dans `user://recordings/` à la fin, à la relance, au changement de variante et à la fermeture. Relecture à l'écran (`-- --replay=`) ou sans fenêtre (`tools/replay.gd`, vérifie l'état final). **Pour signaler un bug ou un ressenti : joindre le dernier fichier de `recordings/`.**
+- 2026-11-18 — **Réponses aux questions de `combat.md`** (en cours) :
+  - Q1 (A ou B) : **la variante B est clairement la plus amusante.**
+  - Q3 (relâcher maintenant ou tenir) : **le choix existe en jeu.**
+  - Q2 (lisibilité des 24 images), Q4 (avancer lanterne tendue), Q5 (huile : tension ou frustration) : à venir.
 
 ## Plus tard (hors périmètre de P1)
 
