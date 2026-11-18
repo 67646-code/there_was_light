@@ -1,0 +1,103 @@
+[gd_resource type="Resource" script_class="FeedbackSettings" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://src/core/feedback_settings.gd" id="1_settings"]
+[ext_resource type="Script" path="res://src/core/impact_feedback.gd" id="2_impact"]
+
+[sub_resource type="Resource" id="perfect_parry"]
+script = ExtResource("2_impact")
+hitstop_frames = 6
+child_knockback = 0.0
+dog_knockback = 40.0
+knockback_frames = 6
+shake_strength = 4.0
+shake_frames = 8
+tone_hz = 880.0
+tone_ms = 80
+
+[sub_resource type="Resource" id="guard"]
+script = ExtResource("2_impact")
+hitstop_frames = 3
+child_knockback = 30.0
+dog_knockback = 0.0
+knockback_frames = 6
+shake_strength = 2.0
+shake_frames = 6
+tone_hz = 330.0
+tone_ms = 60
+
+[sub_resource type="Resource" id="whiff"]
+script = ExtResource("2_impact")
+hitstop_frames = 0
+child_knockback = 0.0
+dog_knockback = 0.0
+knockback_frames = 0
+shake_strength = 0.0
+shake_frames = 0
+tone_hz = 220.0
+tone_ms = 50
+
+[sub_resource type="Resource" id="hurt"]
+script = ExtResource("2_impact")
+hitstop_frames = 8
+child_knockback = 80.0
+dog_knockback = 0.0
+knockback_frames = 8
+shake_strength = 10.0
+shake_frames = 14
+tone_hz = 160.0
+tone_ms = 150
+
+[sub_resource type="Resource" id="guard_break"]
+script = ExtResource("2_impact")
+hitstop_frames = 6
+child_knockback = 40.0
+dog_knockback = 0.0
+knockback_frames = 8
+shake_strength = 6.0
+shake_frames = 12
+tone_hz = 120.0
+tone_ms = 250
+
+[sub_resource type="Resource" id="release"]
+script = ExtResource("2_impact")
+hitstop_frames = 8
+child_knockback = 0.0
+dog_knockback = 80.0
+knockback_frames = 10
+shake_strength = 8.0
+shake_frames = 14
+tone_hz = 660.0
+tone_ms = 200
+
+[sub_resource type="Resource" id="posture_break"]
+script = ExtResource("2_impact")
+hitstop_frames = 14
+child_knockback = 0.0
+dog_knockback = 0.0
+knockback_frames = 0
+shake_strength = 14.0
+shake_frames = 20
+tone_hz = 1200.0
+tone_ms = 300
+
+[sub_resource type="Resource" id="soothe"]
+script = ExtResource("2_impact")
+hitstop_frames = 0
+child_knockback = 0.0
+dog_knockback = 0.0
+knockback_frames = 0
+shake_strength = 0.0
+shake_frames = 0
+tone_hz = 990.0
+tone_ms = 400
+
+[resource]
+script = ExtResource("1_settings")
+perfect_parry = SubResource("perfect_parry")
+guard = SubResource("guard")
+whiff = SubResource("whiff")
+hurt = SubResource("hurt")
+guard_break = SubResource("guard_break")
+release = SubResource("release")
+posture_break = SubResource("posture_break")
+soothe = SubResource("soothe")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://src/game/arena.gd" id="1_arena"]
 [ext_resource type="Script" path="res://src/game/arena_view.gd" id="2_view"]
@@ -6,15 +6,23 @@
 [ext_resource type="Resource" path="res://data/boss_dog.tres" id="4_dog"]
 [ext_resource type="Resource" path="res://data/arena.tres" id="5_arena"]
 [ext_resource type="Script" path="res://src/game/debug_overlay.gd" id="6_debug"]
+[ext_resource type="Resource" path="res://data/feedback.tres" id="7_feedback"]
+[ext_resource type="Script" path="res://src/game/impact_effects.gd" id="8_effects"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_arena")
 child_settings = ExtResource("3_child")
 boss_data = ExtResource("4_dog")
 arena_settings = ExtResource("5_arena")
+feedback_settings = ExtResource("7_feedback")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -200)
+
+[node name="ImpactEffects" type="Node" parent="." node_paths=PackedStringArray("camera")]
+unique_name_in_owner = true
+script = ExtResource("8_effects")
+camera = NodePath("../Camera2D")
 
 [node name="ArenaView" type="Node2D" parent="."]
 unique_name_in_owner = true

@@ -15,7 +15,7 @@ Référence : `docs/design/combat.md`.
 - [x] P1.2 — Logique pure de l'enfant, image par image : huile, lumière, parade parfaite, garde, parade dans le vide, relâche, santé. Tests par scénarios.
 - [x] P1.3 — Logique pure du chien : enchaînement des attaques (anticipation, impact, récupération), posture, brèche, deux phases. Tests.
 - [x] P1.4 — Arène jouable : rectangles, déplacement, saut, esquive, direction de la lanterne. Le rectangle du chien change de couleur pendant l'anticipation.
-- [ ] P1.5 — Retour d'impact : hitstop, recul, tremblement d'écran, sons provisoires.
+- [x] P1.5 — Retour d'impact : hitstop, recul, tremblement d'écran, sons provisoires.
 - [x] P1.6 — Affichage de debug (activable) : huile, lumière, posture, état courant, fenêtre de parade.
 - [ ] P1.7 — Interrupteur variante A / variante B pour le test comparatif.
 - [ ] P1.8 — Enregistrement et relecture des entrées d'une partie (pour reproduire un bug ou un ressenti).
@@ -38,6 +38,8 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — P1.4 : arène jouable (`src/scenes/arena.tscn`, chargée par `main.tscn`). Déplacements dans `src/core/arena_motion.gd` (pur, testé) ; `ArenaFight` réunit duel et déplacements, `ChildInput` porte aussi déplacement et saut (unité à enregistrer en P1.8). Valeurs proposées dans `data/arena.tres`, à régler. Choix : l'enfant fait toujours face au chien ; un saut au-dessus de `jump_clear_height` évite les attaques « devant » ; le bond du chien atterrit à mi-impact ; l'esquive part dans le sens du déplacement, sinon en arrière.
 - 2026-11-18 — Premier essai manette : la boucle parer/charger/relâcher fonctionne. **Brèche peu claire** : R1 répété sur le chien bleu semblait sans effet ou « relançait » le combat. Causes possibles : hors de portée (zone de 150 px entre centres, soit ~80 px du bord du chien), appuis ignorés pendant la récupération d'une parade dans le vide, ou apaisement réussi mais passage en phase 2 sans retour visuel. **À garder en tête** : rayon d'apaisement visible ou plus large, retour clair du changement de phase.
 - 2026-11-18 — P1.6 (avancée avant P1.5 pour comprendre la brèche) : panneau de debug (F1 / Select, actif au lancement) avec huile, fenêtre, lumière, posture, phase, états, temps de brèche, distance ; zone de portée verte et limites « loin » rouges autour du chien ; journal des événements (`CombatLog`) dont « Apaisé → phase 2 », « Apaisement hors de portée », « R1 ignoré : … ».
+- 2026-11-18 — Deuxième essai : « ça fonctionne assez bien ». Fenêtres de réussite jugées **un peu trop courtes pour un premier boss** : réglage prévu plus tard (fenêtre de parade, anticipations).
+- 2026-11-18 — P1.5 : retour d'impact par événement dans `data/feedback.tres` (parade parfaite, garde, vide, touché, garde brisée, relâche, brèche, apaisement). Gel et recul dans `ArenaFight` (core, donc rejouables) ; tremblement de caméra et bips générés dans `src/game/impact_effects.gd`. Valeurs proposées, à régler.
 
 ## Plus tard (hors périmètre de P1)
 
