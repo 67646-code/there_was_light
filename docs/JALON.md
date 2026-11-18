@@ -25,6 +25,8 @@ Référence : `docs/design/combat.md`.
 
 Le développeur a joué les deux variantes et répondu aux cinq questions de `combat.md`. Décision notée ci-dessous : continuer, ajuster ou repenser le combat.
 
+**✅ Atteint le 18 novembre 2026. Décision : CONTINUER avec la variante B**, dans son réglage actuel (`data/`). Le combat « tenir, charger, relâcher » est amusant, la parade est satisfaisante, le combat est jugé équilibré et équitable.
+
 ## Notes
 
 _(Notes courtes et datées au fil du jalon.)_
@@ -53,6 +55,8 @@ _(Notes courtes et datées au fil du jalon.)_
 - 2026-11-18 — P1.9, effet de bord : en phase 2, l'anticipation entre deux coups de la rafale (11 images) devient plus courte que la fenêtre (12). L'invariant de test « anticipation > fenêtre » est remplacé par « deux impacts consécutifs plus espacés que la fenêtre » (17 > 12), le vrai risque étant qu'un seul appui vise deux coups.
 - 2026-11-18 — Essai après P1.9 : « ça marche mieux », mais la posture du chien se régénère trop vite. Réglages demandés par l'humain : fenêtre de parade 12 → **14 images** (233 ms) ; régénération de posture 10 → **5/s**, délai avant régénération 2 s → **3 s** (180 images). `combat.md` mis à jour (valeurs en vigueur, v0 rappelées).
 - 2026-11-18 — Essai après réglage : parade « beaucoup plus équilibrée et juste », combat plus court mais « beaucoup plus agréable ». Sentiment d'injustice quand l'huile tombe à zéro et que la posture du chien remonte. **Brèche ratée → posture à 0 trop punitif** : le chien se relève désormais à 50 (`posture_after_missed_break`, demandé par l'humain : 50-60).
+- 2026-11-18 — Point 2 précisé : avec l'ancien réglage, le temps de fuir pour regagner de l'huile suffisait au chien pour perdre la majorité de sa posture. Avec la régénération ralentie, « c'est beaucoup mieux » ; pas de blocage supplémentaire. Verdict final : « la parade reste satisfaisante, le combat est équilibré et équitable, c'est ce qu'on cherchait ».
+- 2026-11-18 — **Clôture de P1.** Points ouverts pour la suite : durée du combat (5,5 s en jeu parfait, 2 à 4 min visées à l'origine ; le développeur préfère pour l'instant un combat plus court et agréable), retour visuel du changement de phase et de l'apaisement, avancer lanterne tendue peu utilisé (gardé tel quel), anticipations de phase 1 (étape 3, non nécessaire à ce stade).
 
 ## Plus tard (hors périmètre de P1)
 
