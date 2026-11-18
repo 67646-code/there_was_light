@@ -49,7 +49,7 @@ func test_soothe_out_of_range_is_logged() -> void:
 func test_ignored_press_is_logged_with_reason() -> void:
 	# Appui dans le vide, puis nouvel appui pendant la récupération.
 	_tick(ChildInput.make(true), false)
-	for i: int in 9:
+	for i: int in duel.child.settings.perfect_parry_window_frames + 1:
 		_tick(ChildInput.make(), false)
 	_tick(ChildInput.make(true), false)
 	assert_string_contains(combat_log.entries[-1], "R1 ignoré : récupération")
