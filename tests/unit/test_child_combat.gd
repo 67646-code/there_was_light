@@ -87,6 +87,15 @@ func test_whiff_recovery_lasts_twenty_frames() -> void:
 	assert_eq(child.state, S.NEUTRAL)
 
 
+func test_consumed_press_does_not_whiff() -> void:
+	_to(19)
+	_to(20, _held())
+	child.consume_lantern_press()
+	_to(40)
+	assert_eq(child.state, S.NEUTRAL)
+	assert_eq(child.oil(), 100)
+
+
 func test_cannot_parry_during_whiff_recovery() -> void:
 	_to(19)
 	_to(20, _held())

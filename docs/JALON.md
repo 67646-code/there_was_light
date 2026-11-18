@@ -13,7 +13,7 @@ Référence : `docs/design/combat.md`.
 - [x] P1.0 — Proposer les entrées (clavier et manette) à ajouter à `project.godot` ; les ajouter après accord.
 - [x] P1.1 — Classes de données (`src/core/`) et premières ressources (`data/`) : réglages de l'enfant, attaque, boss. Valeurs de `combat.md`.
 - [x] P1.2 — Logique pure de l'enfant, image par image : huile, lumière, parade parfaite, garde, parade dans le vide, relâche, santé. Tests par scénarios.
-- [ ] P1.3 — Logique pure du chien : enchaînement des attaques (anticipation, impact, récupération), posture, brèche, deux phases. Tests.
+- [x] P1.3 — Logique pure du chien : enchaînement des attaques (anticipation, impact, récupération), posture, brèche, deux phases. Tests.
 - [ ] P1.4 — Arène jouable : rectangles, déplacement, saut, esquive, direction de la lanterne. Le rectangle du chien change de couleur pendant l'anticipation.
 - [ ] P1.5 — Retour d'impact : hitstop, recul, tremblement d'écran, sons provisoires.
 - [ ] P1.6 — Affichage de debug (activable) : huile, lumière, posture, état courant, fenêtre de parade.
@@ -33,6 +33,8 @@ _(Notes courtes et datées au fil du jalon.)_
 
 - 2026-11-18 — P1.1 : `ChildSettings`, `AttackData`, `BossData`, `CombatTypes`. Variante A/B = choix entre `data/child_variant_a.tres` et `child_variant_b.tres` (aucun drapeau dans le code). Phase 2 : anticipations à 80 %, arrondies à l'image la plus proche (24 → 19). Chaque coup non paré retire `health_damage` = 1.
 - 2026-11-18 — P1.2 : `ChildCombat` + `ChildInput` (boutons tenus, appuis détectés par la logique → relecture simple). Huile stockée × 60 pour des débits entiers. Choix à valider en jeu : un coup pendant l'anticipation de la relâche l'annule mais **conserve les charges** ; l'esquive et la relâche sont possibles depuis la garde ; après une parade parfaite ou une relâche, bouton tenu → garde directe.
+- 2026-11-18 — P1.3 : `PostureGauge`, `DogBoss`, `Duel` (relie enfant et chien ; la couche jeu fournit « à portée » et « loin »). Choix à valider : lever la lanterne sur le chien en brèche l'apaise sans compter comme parade dans le vide ; brèche non apaisée en 2 s → le chien se relève, posture à 0, même phase ; la relâche ne touche que si l'enfant est à portée.
+- 2026-11-18 — **Observation d'équilibrage** (pas de changement de données) : un joueur parfait scripté apaise le chien en **331 images (5,5 s)** dans les deux variantes — 5 parades parfaites par phase suffisent. Loin des 2 à 4 min visées : à garder en tête en jouant (posture max, posture par parade, régénération).
 
 ## Plus tard (hors périmètre de P1)
 

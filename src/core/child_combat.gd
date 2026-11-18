@@ -73,6 +73,12 @@ func receive_hit(attack: AttackData) -> HitResult:
 	return HitResult.HURT
 
 
+## L'appui en cours a servi à autre chose qu'une parade (apaiser) : pas de parade dans le vide.
+func consume_lantern_press() -> void:
+	if state == State.PARRY_WINDOW:
+		_enter(State.GUARD if _lantern_held else State.NEUTRAL)
+
+
 func oil() -> int:
 	return _oil_sub / SUB_UNITS
 
