@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tools/check.sh)",
+      "Bash(tools/check.sh:*)",
+      "Bash(./tools/check.sh)",
+      "Bash(./tools/check.sh:*)",
+      "Bash(tools/setup-godot.sh)",
+      "Bash(gdformat:*)",
+      "Bash(gdlint:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Edit(.godot/**)",
+      "Edit(addons/gut/**)"
+    ]
+  }
+}

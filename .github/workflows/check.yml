@@ -1,0 +1,39 @@
+name: Vérification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache de Godot
+        uses: actions/cache@v4
+        with:
+          path: .tools
+          key: godot-${{ hashFiles('tools/godot-version', 'tools/setup-godot.sh') }}
+
+      - name: Installer gdtoolkit
+        run: pip install "gdtoolkit==4.5.0"
+
+      - name: Installer Godot
+        run: tools/setup-godot.sh
+
+      - name: Vérifier le projet
+        run: tools/check.sh
+
+      - name: Journaux
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: journaux
+          path: .test-results/

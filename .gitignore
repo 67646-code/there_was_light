@@ -1,0 +1,23 @@
+# Godot : cache local, régénéré à l'import
+.godot/
+*.translation
+
+# Exports et binaires
+/build/
+/export/
+*.x86_64
+*.exe
+*.pck
+
+# Outils téléchargés par tools/setup-godot.sh
+/.tools/
+
+# Sorties de tests
+/.test-results/
+
+# Claude Code : réglages personnels
+.claude/settings.local.json
+
+# Système
+.DS_Store
+Thumbs.db
