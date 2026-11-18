@@ -16,6 +16,10 @@ var _dodge_dir: float = 0.0
 var _leap_frames_left: int = 0
 var _leap_step: float = 0.0
 var _prev_jump: bool = false
+var _child_knock_frames: int = 0
+var _child_knock_step: float = 0.0
+var _dog_knock_frames: int = 0
+var _dog_knock_step: float = 0.0
 
 
 func _init(arena: ArenaSettings) -> void:
@@ -68,6 +72,22 @@ func start_leap(frames: int) -> void:
 	_leap_step = (target - dog_x) / _leap_frames_left
 
 
+## Recul de l'enfant, loin du chien, réparti sur `frames` images.
+func knock_child(distance_px: float, frames: int) -> void:
+	if distance_px <= 0.0:
+		return
+	_child_knock_frames = maxi(frames, 1)
+	_child_knock_step = -facing() * distance_px / _child_knock_frames
+
+
+## Recul du chien, loin de l'enfant, réparti sur `frames` images.
+func knock_dog(distance_px: float, frames: int) -> void:
+	if distance_px <= 0.0:
+		return
+	_dog_knock_frames = maxi(frames, 1)
+	_dog_knock_step = facing() * distance_px / _dog_knock_frames
+
+
 ## Déplace l'enfant. `speed_factor` : 1 normal, réduit lanterne tendue, 0 immobilisé.
 func tick_child(input: ChildInput, speed_factor: float) -> void:
 	var can_move: bool = speed_factor > 0.0
@@ -76,6 +96,9 @@ func tick_child(input: ChildInput, speed_factor: float) -> void:
 		child_x += _dodge_dir * settings.dodge_speed / FRAME_RATE
 	elif can_move:
 		child_x += input.move * settings.child_speed * speed_factor / FRAME_RATE
+	if _child_knock_frames > 0:
+		_child_knock_frames -= 1
+		child_x += _child_knock_step
 	if can_move and input.jump and not _prev_jump and not is_airborne():
 		_child_vertical_speed = settings.jump_velocity
 	_prev_jump = input.jump
@@ -89,7 +112,10 @@ func tick_child(input: ChildInput, speed_factor: float) -> void:
 
 ## Déplace le chien. `approaching` : il marche vers l'enfant ; `pushed` : la lanterne le repousse.
 func tick_dog(approaching: bool, pushed: bool) -> void:
-	if _leap_frames_left > 0:
+	if _dog_knock_frames > 0:
+		_dog_knock_frames -= 1
+		dog_x += _dog_knock_step
+	elif _leap_frames_left > 0:
 		_leap_frames_left -= 1
 		dog_x += _leap_step
 	elif pushed:

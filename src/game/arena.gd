@@ -5,6 +5,7 @@ extends Node2D
 @export var child_settings: ChildSettings
 @export var boss_data: BossData
 @export var arena_settings: ArenaSettings
+@export var feedback_settings: FeedbackSettings
 @export var rng_seed: int = 1
 
 ## Affichage de debug au lancement (F1 / Select pour basculer).
@@ -16,6 +17,7 @@ var combat_log: CombatLog
 @onready var _view: ArenaView = %ArenaView
 @onready var _message: Label = %Message
 @onready var _debug: DebugOverlay = %DebugOverlay
+@onready var _effects: ImpactEffects = %ImpactEffects
 
 
 func _ready() -> void:
@@ -55,7 +57,8 @@ static func read_controller() -> ChildInput:
 
 
 func _restart() -> void:
-	fight = ArenaFight.new(child_settings, boss_data, arena_settings, rng_seed)
+	fight = ArenaFight.new(child_settings, boss_data, arena_settings, rng_seed, feedback_settings)
+	_effects.watch(fight)
 	fight.duel.ended.connect(_on_fight_ended)
 	combat_log = CombatLog.new(fight.duel)
 	_view.fight = fight

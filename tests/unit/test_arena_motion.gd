@@ -119,3 +119,13 @@ func test_leap_lands_next_to_child() -> void:
 	for i: int in 4:
 		motion.tick_dog(false, false)
 	assert_almost_eq(motion.distance(), 95.0, 0.01)
+
+
+func test_knockbacks_push_apart_over_frames() -> void:
+	motion.knock_child(80.0, 8)
+	motion.knock_dog(40.0, 4)
+	for i: int in 8:
+		motion.tick_child(_move(0), 1.0)
+		motion.tick_dog(false, false)
+	assert_almost_eq(motion.child_x, -380.0, 0.01)
+	assert_almost_eq(motion.dog_x, 340.0, 0.01)
