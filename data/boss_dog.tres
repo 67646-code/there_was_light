@@ -11,8 +11,8 @@
 script = ExtResource("1_script")
 id = &"dog"
 max_posture = 100
-posture_regen_per_second = 10
-posture_regen_delay_frames = 120
+posture_regen_per_second = 5
+posture_regen_delay_frames = 180
 break_stun_frames = 120
 phase_1_attacks = Array[ExtResource("6_attack")]([ExtResource("2_bite"), ExtResource("3_burst"), ExtResource("4_leap")])
 phase_2_attacks = Array[ExtResource("6_attack")]([ExtResource("2_bite"), ExtResource("3_burst"), ExtResource("4_leap"), ExtResource("5_delayed")])
