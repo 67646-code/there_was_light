@@ -80,6 +80,7 @@ Principes :
 
 - Lire `docs/JALON.md` avant de commencer. Ne travailler que sur le jalon actif ; noter les idées hors périmètre dans la section « Plus tard » du jalon, sans les implémenter.
 - **Une tâche = une branche = une PR.** Pas de commit direct sur `main`. Branches : `p1/parade-parfaite`, `fix/…`, `docs/…`.
+- **Un tag par tâche terminée.** Après la fusion dans `main`, poser un tag annoté sur le commit de fusion, nommé d'après l'identifiant de la tâche du jalon : `git tag -a p1.2 -m "P1.2 — Logique pure de l'enfant"` puis `git push origin p1.2`. Correctif hors tâche : `p1.2-fix1`. Ne jamais déplacer ni supprimer un tag publié. (`main` n'est pas protégée côté GitHub : la discipline PR + `check.sh` vert repose sur nous.)
 - Petits pas : chaque commit laisse `check.sh` au vert.
 - Ne pas multiplier les documents. Mettre à jour l'existant ; un seul jalon actif ; pas de rapports d'audit commités sauf demande.
 - En cas de doute sur une intention de design, demander plutôt que deviner.
