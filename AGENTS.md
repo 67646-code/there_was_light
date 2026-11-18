@@ -8,7 +8,9 @@ Jeu 2D d'action centré sur le combat, dans l'esprit de Nine Sols. Un enfant tra
 
 - Concept et piliers : `docs/design/concept.md`
 - Combat (actions, valeurs, boss) : `docs/design/combat.md`
+- Bible artistique (style, règles de génération des sprites, animations) : `docs/design/art.md`
 - **Jalon actif : `docs/JALON.md` — à lire avant toute tâche.**
+- Jalons clos : `docs/jalons/`
 - Décisions d'architecture : `docs/decisions/`
 
 ## Commandes
