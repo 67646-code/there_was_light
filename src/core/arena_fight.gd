@@ -63,6 +63,25 @@ func tick(controller: ChildInput) -> void:
 	motion.tick_dog(approaching and not _dog_frozen(), pushed and not _dog_frozen())
 
 
+## État résumé, pour vérifier qu'une relecture retombe exactement au même endroit.
+func summary() -> Dictionary:
+	var child := duel.child
+	var dog := duel.dog
+	return {
+		"duel_frame": duel.frame,
+		"over": duel.is_over,
+		"child_state": ChildCombat.State.keys()[child.state],
+		"child_health": child.health,
+		"child_oil": child.oil(),
+		"child_light": child.light,
+		"dog_state": DogBoss.State.keys()[dog.state],
+		"dog_phase": dog.phase,
+		"dog_posture": dog.posture.value(),
+		"child_x": snappedf(motion.child_x, 0.01),
+		"dog_x": snappedf(motion.dog_x, 0.01),
+	}
+
+
 func fx_for(kind: StringName) -> ImpactFeedback:
 	var fx := feedback.get(kind) as ImpactFeedback
 	return fx if fx != null else ImpactFeedback.new()
