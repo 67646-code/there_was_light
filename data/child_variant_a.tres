@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ChildSettings" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/core/child_settings.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+max_health = 5
+hurt_invulnerability_frames = 45
+max_oil = 100
+oil_regen_per_second = 8
+guard_oil_cost = 15
+whiff_oil_cost = 5
+advance_oil_cost_per_second = 15
+guard_break_stun_frames = 60
+guard_break_recover_oil = 20
+perfect_parry_window_frames = 8
+perfect_parry_posture = 20
+perfect_parry_light = 1
+whiff_recovery_frames = 20
+max_light = 3
+release_enabled = false
+release_posture_by_charges = Array[int]([15, 35, 60])
+release_windup_frames = 10
+advance_speed_factor = 0.5
+dodge_invulnerability_frames = 12
+dodge_cooldown_frames = 30

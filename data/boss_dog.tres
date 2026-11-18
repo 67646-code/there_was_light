@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BossData" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://src/core/boss_data.gd" id="1_script"]
+[ext_resource type="Resource" path="res://data/attacks/dog_bite.tres" id="2_bite"]
+[ext_resource type="Resource" path="res://data/attacks/dog_bite_burst.tres" id="3_burst"]
+[ext_resource type="Resource" path="res://data/attacks/dog_leap.tres" id="4_leap"]
+[ext_resource type="Resource" path="res://data/attacks/dog_delayed_bite.tres" id="5_delayed"]
+[ext_resource type="Script" path="res://src/core/attack_data.gd" id="6_attack"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"dog"
+max_posture = 100
+posture_regen_per_second = 10
+posture_regen_delay_frames = 120
+break_stun_frames = 120
+phase_1_attacks = Array[ExtResource("6_attack")]([ExtResource("2_bite"), ExtResource("3_burst"), ExtResource("4_leap")])
+phase_2_attacks = Array[ExtResource("6_attack")]([ExtResource("2_bite"), ExtResource("3_burst"), ExtResource("4_leap"), ExtResource("5_delayed")])
+phase_2_windup_percent = 80

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/core/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"dog_bite"
+windup_frames = 24
+hit_count = 1
+interval_windup_frames = 0
+active_frames = 6
+recovery_frames = 30
+parry_direction = 0
+ranged = false
+health_damage = 1
