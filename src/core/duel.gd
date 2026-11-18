@@ -5,6 +5,8 @@ extends RefCounted
 ## La couche jeu fournit les commandes et la géométrie (à portée, loin).
 
 signal ended(child_won: bool)
+## Lanterne levée sur le chien en brèche, mais l'enfant est hors de portée.
+signal soothe_missed
 
 var child: ChildCombat
 var dog: DogBoss
@@ -37,6 +39,11 @@ func tick(input: ChildInput, in_range: bool, child_is_far: bool) -> void:
 	_try_soothe()
 
 
+## L'enfant était-il à portée à cette image ?
+func last_in_range() -> bool:
+	return _in_range
+
+
 func _resolve_hit() -> void:
 	var attack: AttackData = dog.pending_hit()
 	if attack == null or not _in_range or is_over:
@@ -48,11 +55,14 @@ func _resolve_hit() -> void:
 
 func _try_soothe() -> void:
 	# Lever la lanterne (nouvel appui) sur le chien en brèche l'apaise.
-	if is_over or dog.state != DogBoss.State.BROKEN or not _in_range:
+	if is_over or dog.state != DogBoss.State.BROKEN:
 		return
-	if child.state == ChildCombat.State.PARRY_WINDOW and child.state_elapsed() == 0:
-		if dog.soothe():
-			child.consume_lantern_press()
+	if child.state != ChildCombat.State.PARRY_WINDOW or child.state_elapsed() != 0:
+		return
+	if not _in_range:
+		soothe_missed.emit()
+	elif dog.soothe():
+		child.consume_lantern_press()
 
 
 func _on_child_released(posture_amount: int) -> void:

@@ -120,6 +120,16 @@ func test_soothing_does_not_whiff() -> void:
 	assert_ne(duel.child.state, ChildCombat.State.WHIFF_RECOVERY)
 
 
+func test_soothing_out_of_range_is_reported() -> void:
+	var duel := _duel()
+	watch_signals(duel)
+	duel.dog.take_posture(duel.dog.data.max_posture)
+	_to(duel, 1, ChildInput.make(), false)
+	_to(duel, 2, ChildInput.make(true), false)
+	assert_signal_emitted(duel, "soothe_missed")
+	assert_eq(duel.dog.state, DogBoss.State.BROKEN)
+
+
 func test_same_seed_and_inputs_same_outcome() -> void:
 	var a := _duel(load(DOG) as BossData)
 	var b := _duel(load(DOG) as BossData)

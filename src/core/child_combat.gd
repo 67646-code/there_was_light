@@ -11,6 +11,8 @@ signal whiffed
 signal release_started(charges: int)
 signal released(posture: int)
 signal dodged
+## Appui sur la lanterne sans effet (récupération, garde brisée…) : aide au réglage.
+signal lantern_press_ignored(reason: StringName)
 signal hurt(health: int)
 signal died
 
@@ -140,8 +142,13 @@ func _handle_presses(input: ChildInput) -> void:
 		_try_dodge()
 	if input.release and not _prev.release:
 		_try_release()
-	if input.lantern and not _prev.lantern and state == State.NEUTRAL and not guard_is_broken:
-		_enter(State.PARRY_WINDOW)
+	if input.lantern and not _prev.lantern:
+		if guard_is_broken:
+			lantern_press_ignored.emit(&"guard_broken")
+		elif state == State.NEUTRAL:
+			_enter(State.PARRY_WINDOW)
+		else:
+			lantern_press_ignored.emit(StringName(State.keys()[state]))
 
 
 func _update_oil(input: ChildInput) -> void:

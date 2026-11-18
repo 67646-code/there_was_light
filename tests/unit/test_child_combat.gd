@@ -97,11 +97,13 @@ func test_consumed_press_does_not_whiff() -> void:
 
 
 func test_cannot_parry_during_whiff_recovery() -> void:
+	watch_signals(child)
 	_to(19)
 	_to(20, _held())
 	_to(30)
 	_to(31, _held())
 	assert_eq(child.state, S.WHIFF_RECOVERY)
+	assert_signal_emitted_with_parameters(child, "lantern_press_ignored", [&"WHIFF_RECOVERY"])
 
 
 func test_releasing_guard_returns_to_neutral() -> void:
