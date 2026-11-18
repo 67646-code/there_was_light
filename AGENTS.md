@@ -17,6 +17,7 @@ Jeu 2D d'action centré sur le combat, dans l'esprit de Nine Sols. Un enfant tra
 |---|---|
 | `tools/check.sh` | Vérification complète : import, chargement de tous les scripts, format, lint, tests, lancement du jeu. **Doit passer avant tout commit.** |
 | `tools/check.sh --fix` | Reformate le code avec gdformat, puis vérifie. |
+| `godot --headless --path . -s tools/replay.gd -- <fichier.json>` | Rejoue un enregistrement de partie sans fenêtre et vérifie qu'il retombe sur le même état final (code 0 identique, 1 écart). Les parties jouées sont enregistrées dans `user://recordings/` (sous Linux : `~/.local/share/godot/app_userdata/There Was Light/recordings/`). Relecture à l'écran : `godot --path . -- --replay=<fichier.json>`. |
 | `tools/setup-godot.sh` | Installe Godot (version de `tools/godot-version`) et gdtoolkit dans `.tools/` si la machine ne les a pas. |
 
 Godot utilisé : `$GODOT`, sinon `godot` dans le PATH, sinon `.tools/godot/godot`. La version est épinglée (**4.7.2**) ; `check.sh` refuse toute autre version.
