@@ -17,7 +17,7 @@ L'huile se perd quand on joue mal ; la lumière se gagne quand on joue bien.
 
 | Action | Fonctionnement | Valeurs v0 |
 |---|---|---|
-| **Parade parfaite** | Appui sur « lanterne » juste avant l'impact | Fenêtre : 8 images (133 ms) après l'appui. Huile : 0. **+1 charge.** Posture infligée : 8 |
+| **Parade parfaite** | Appui sur « lanterne » juste avant l'impact | Fenêtre : 14 images (233 ms) après l'appui *(v0 : 8 ; élargie après essai)*. Huile : 0. **+1 charge.** Posture infligée : 8 |
 | **Garde** | Lanterne maintenue, impact hors fenêtre parfaite | Aucun dégât de santé. Huile : −15. Pas de lumière |
 | **Parade dans le vide** | Appui sans attaque à parer | 20 images (333 ms) de récupération vulnérable. Huile : −5 |
 | **Direction** | Lanterne devant (neutre), en haut ou vers le bas | Mauvaise direction = garde |
@@ -34,7 +34,7 @@ L'huile se perd quand on joue mal ; la lumière se gagne quand on joue bien.
 ## 3. Posture des monstres
 
 - Jauge de 0 à 100 qui **monte** avec la posture infligée.
-- Régénération : −10/s après 2 s sans pression (bloquée tant que la lanterne avance sur lui).
+- Régénération : −5/s après 3 s sans pression *(v0 : −10/s après 2 s ; ralentie après essai)*, bloquée tant que la lanterne avance sur lui.
 - À 100 : **brèche**. Monstre sonné 120 images (2 s) ; l'enfant lève la lanterne pour l'**apaiser** (fin de phase ou du combat).
 
 ## 4. Premier boss : le chien errant
@@ -49,6 +49,8 @@ Deux phases, chacune terminée par une brèche.
 | Morsure retardée (phase 2, feinte) | 36 images (600 ms) avec hésitation | 6 | 30 |
 
 Phase 2 : anticipations réduites de 20 %. Durée visée : 2 à 4 minutes.
+
+**Signal de parade** (ajouté après essai) : le chien flashe en blanc 20 images (333 ms) avant chaque impact, pendant 6 images. Un appui en réaction (~200 ms) tombe dans la fenêtre de parade parfaite.
 
 ## 5. Questions pour le prototype
 
