@@ -79,6 +79,10 @@ func consume_lantern_press() -> void:
 		_enter(State.GUARD if _lantern_held else State.NEUTRAL)
 
 
+func lantern_direction() -> CombatTypes.Direction:
+	return _direction
+
+
 func oil() -> int:
 	return _oil_sub / SUB_UNITS
 
